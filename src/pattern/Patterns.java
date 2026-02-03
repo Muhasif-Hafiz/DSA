@@ -211,7 +211,7 @@ public class Patterns {
 
              for(int j=0;j<size;j++){
                  int number = minimumDistance(i, j, row);
-                 System.out.print(number);
+                 System.out.print(number + "  ");
 
              }
              System.out.println();
@@ -221,12 +221,14 @@ public class Patterns {
 
 
     }
-    static int minimumDistance(int i, int j, int row){
+
+    static int minimumDistance(int i, int j, int row)
+    {
          int size =(2 *row)-1;
 
          int left = row - j;  // 0
          int top = row -i; // 0
-         int right = row -(size+1 -j); // 4 -(7-4) = 1
+         int right = row -(size-1 -j); // 4 -(7-4) = 1
          int bottom = row -(size-1 -i); //  1
 
         return Math.max(Math.max(left, top), Math.max(right, bottom));
