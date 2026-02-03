@@ -97,9 +97,32 @@ public class BasicMathProblems {
 
         return oldNum ==newNum;
     }
+    static ArrayList printDivisors(int num){
+        ArrayList list = new ArrayList<>();
 
+        for(int i=1;i<=num;i++){
+            if(num % i ==0){
+                list.add(i);
+            }
 
+        }
+        return list;
+    }
+    static  ArrayList printDivisorsOptimised(int num){
+        ArrayList list = new ArrayList<>();
 
+        for(int i=1;i*i<=num;i++){
+            if(num % i ==0){
+                if(i == num/i){
+                    list.add(i);
+                }else{
+                    list.add(i);
+                    list.add(num/i);
+                }
+            }
+        }
+        return list;
+    }
 
 }
 
