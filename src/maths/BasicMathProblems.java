@@ -124,6 +124,10 @@ public class BasicMathProblems {
         return list;
     }
 
+    static boolean isPrime(int  num){
+         return num%2 ==0;
+    }
+
 }
 
 
