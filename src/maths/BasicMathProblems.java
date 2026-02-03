@@ -16,7 +16,7 @@ public class BasicMathProblems {
 
         // boolean isPalindrome = isNumberPalindrome(1122311);
          //System.out.println(Arrays.toString(printDivisors(6)));
-         System.out.println( printDivisors(1000));
+        // System.out.println( printDivisors(1000));
 
 
     }
@@ -50,6 +50,24 @@ public class BasicMathProblems {
         if(num==0) return 1;
         return  (int) Math.log10(  num) +1;
     }
+    static int reversedNumberOptimised(int num){
+        // T.C -> 0(log10(num) // because the number of iterations depends upon the number of digits we have.
+
+        if(num >= Integer.MAX_VALUE) return 0;
+
+        if(num == 0) return  0;
+        int newNum =0;
+        while(num > 0){
+            int lst = num %10;
+            newNum = (newNum * 10) + lst;
+            num /= 10;
+        }
+        return newNum;
+    }
+    static boolean isNumberPalindrome(int num){
+        return num == reversedNumberOptimised(num);
+    }
+
 
 
 
