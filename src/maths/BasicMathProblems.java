@@ -67,6 +67,38 @@ public class BasicMathProblems {
     static boolean isNumberPalindrome(int num){
         return num == reversedNumberOptimised(num);
     }
+    static int gcd(int n1, int n2){
+        int limit = Math.max(n1, n2);
+        int hcf =0;
+
+        for(int i=1;i<= limit;i++){
+            if(n1 % i==0 && n2%i ==0){
+                hcf = i;
+            }
+        }
+
+        return hcf;
+    }
+
+    static  boolean isArmstrongNumber(int num){
+         /*
+
+          T.C ->  log10(num)
+
+         */
+        int oldNum = num;
+        int numSize = (int)Math.log10(num)+1;
+        int newNum =0;
+        while(num != 0){
+            int digit = num %10;
+            newNum += Math.pow(digit, numSize);
+            num/=10;
+        }
+
+        return oldNum ==newNum;
+    }
+
+
 
 
 
