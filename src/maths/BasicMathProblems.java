@@ -108,21 +108,7 @@ public class BasicMathProblems {
         }
         return list;
     }
-    static  ArrayList printDivisorsOptimised(int num){
-        ArrayList list = new ArrayList<>();
 
-        for(int i=1;i*i<=num;i++){
-            if(num % i ==0){
-                if(i == num/i){
-                    list.add(i);
-                }else{
-                    list.add(i);
-                    list.add(num/i);
-                }
-            }
-        }
-        return list;
-    }
 
 }
 
