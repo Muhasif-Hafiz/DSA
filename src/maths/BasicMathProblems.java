@@ -97,17 +97,6 @@ public class BasicMathProblems {
 
         return oldNum ==newNum;
     }
-    static ArrayList printDivisors(int num){
-        ArrayList list = new ArrayList<>();
-
-        for(int i=1;i<=num;i++){
-            if(num % i ==0){
-                list.add(i);
-            }
-
-        }
-        return list;
-    }
 
 
 
