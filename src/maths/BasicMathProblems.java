@@ -16,7 +16,7 @@ public class BasicMathProblems {
 
         // boolean isPalindrome = isNumberPalindrome(1122311);
          //System.out.println(Arrays.toString(printDivisors(6)));
-         System.out.println( printDivisorsOptimised(36));
+         System.out.println( countDigitsBruteForce(36));
 
 
     }
@@ -124,9 +124,6 @@ public class BasicMathProblems {
         return list;
     }
 
-    static boolean isPrime(int  num){
-         return num%2 ==0;
-    }
 
 }
 
