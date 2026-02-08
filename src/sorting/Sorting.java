@@ -5,7 +5,9 @@ import java.util.Arrays;
 public class Sorting {
     static void main() {
         int[] arr = {5, 1, 44, 5, 1, 0, -1, 22, 19};
-        arr = mergeSort(arr, 0, arr.length - 1);
+       // arr = mergeSort(arr, 0, arr.length - 1);
+        //insertionSortAgain(arr);
+        quickSort(arr, 0, arr.length-1);
         System.out.println(Arrays.toString(arr));
 
     }
@@ -128,7 +130,7 @@ public class Sorting {
         int[] left = mergeSort(arr, start, mid);
         int[] right = mergeSort(arr, mid + 1, end);
 
-        return merge(left, right);
+        return mergeAgain(left, right);
     }
 
     static int[] merge(int[] left, int[] right) {
@@ -154,37 +156,93 @@ public class Sorting {
         return newArr;
     }
 
+    static void bubbleSortingAgain(int[] arr) {
+
+        for (int i = 0; i < arr.length; i++) {
+
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr, j, j + 1);
+                }
+            }
+        }
+
+    }
+
+    static void insertionSortAgain(int[] arr) {
+        for (int i = 1; i < arr.length; i++) {
+
+            int key = arr[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr[j] > key) {
+
+                swap(arr, j, j + 1);
+
+                if (j != 0) {
+                    j--;
+                }
+            }
+        }
+
+    }
+
+    static int[] mergeAgain(int[] left, int[] right) {
+        int[] newArr = new int[left.length + right.length];
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < left.length && j < right.length) {
+
+            if (left[i] <= right[j]) {
+                newArr[k++] = left[i++];
+            } else {
+                newArr[k++] = right[j++];
+            }
+
+        }
+
+        while (i < left.length) {
+            newArr[k++] = left[i++];
+        }
+        while (j < right.length) {
+            newArr[k++] = right[j++];
+        }
+        return newArr;
+    }
+
+
     static void quickSort(int[] arr, int low, int high) {
 
-        if (low < high) {
+        if(low<high){
+            int partition = partitionIndex(arr, low, high);
 
-            int partitionIndex = partitionIndex(arr, low, high);
 
-            quickSort(arr, low, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, high);
-
+            quickSort(arr, low, partition-1);
+            quickSort(arr, partition+1, high);
         }
     }
 
     static int partitionIndex(int[] arr, int low, int high) {
-
-        int pivot = arr[low];
+        int pivot = low;
         int i = low;
         int j = high;
 
         while (i < j) {
 
-            while (arr[i] <= pivot && i <= high - 1) {
+            while (arr[i] <= arr[pivot] && i<high) {
                 i++;
             }
-            while (arr[j] > pivot && j >= low - 1) {
+            while (arr[j] > arr[pivot] && j >low) {
                 j--;
             }
             if (i < j) {
-                swap(arr, low, j);
+                swap(arr, i, j);
             }
-
         }
-
+        swap(arr, pivot, j);
+        return pivot;
     }
 }
