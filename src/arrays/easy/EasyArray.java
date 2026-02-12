@@ -1,9 +1,7 @@
 package arrays.easy;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 
 public class EasyArray {
     static void main() {
@@ -18,8 +16,8 @@ public class EasyArray {
 //        System.out.println(Arrays.toString(ans));
         // int [] ans=  unionArrayOptimal(nums1, nums2);
 
-        int[] arr = {1, 1, 1, 1};
-        System.out.println(findMaxConsecutiveOnes(arr));
+        int[] arr = {4,1,2,1,2};
+        System.out.println(singleNumber(arr));
 
     }
 
@@ -300,4 +298,34 @@ public class EasyArray {
         }
         return max;
     }
+    public static int singleNumberBruteFoce(int[] nums) {
+
+        int cnt =0;
+        for(int i=0;i<nums.length;i++){
+
+            for(int j=0;j<nums.length;j++){
+                if(nums[i]== nums[j]) cnt++;
+
+                if(cnt>=2){
+                    cnt=0;
+                    break;
+                }
+
+            }
+            if(cnt==1) return nums[i];
+        }
+
+
+        return cnt;
+    }
+    static  int singleNumber(int [] nums){
+
+        int sum =0;
+
+        for(int i=0;i<nums.length;i++){
+            sum = sum ^nums[i];
+        }
+        return sum;
+    }
+
 }
