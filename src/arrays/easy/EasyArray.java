@@ -16,10 +16,10 @@ public class EasyArray {
 //        int[] nums2 = {1, 5, 7, 8, 8};
 //        int [] ans = unionArray(nums1, nums2);
 //        System.out.println(Arrays.toString(ans));
-     // int [] ans=  unionArrayOptimal(nums1, nums2);
+        // int [] ans=  unionArrayOptimal(nums1, nums2);
 
-        int [] arr = {8, 2, 4, 5, 3, 7, 1};
-        System.out.println(findMissingNumber(arr));
+        int[] arr = {1, 1, 1, 1};
+        System.out.println(findMaxConsecutiveOnes(arr));
 
     }
 
@@ -193,7 +193,7 @@ public class EasyArray {
         return result;
     }
 
-    public static int [] unionArrayOptimal(int[] nums1, int[] nums2) {
+    public static int[] unionArrayOptimal(int[] nums1, int[] nums2) {
         int i = 0;
         int j = 0;
         int prev = Integer.MIN_VALUE;
@@ -238,35 +238,66 @@ public class EasyArray {
         return newArr;
     }
 
-    static int findMissingNumberBetter(int [] arr){
-        boolean [] hashArray  = new boolean [arr.length+1];
+    static int findMissingNumberBetter(int[] arr) {
+        boolean[] hashArray = new boolean[arr.length + 1];
 
-        for(int i=0;i<arr.length;i++){
-            int index = arr[i]-1;
+        for (int i = 0; i < arr.length; i++) {
+            int index = arr[i] - 1;
             hashArray[index] = true;
         }
-        int ans =0;
-        for(int i=1;i<hashArray.length;i++){
-            if(!hashArray[i]){
+        int ans = 0;
+        for (int i = 1; i < hashArray.length; i++) {
+            if (!hashArray[i]) {
                 ans = i;
             }
         }
 
-        return ans+1;
+        return ans + 1;
     }
-    static int findMissingNumber(int [] arr){
 
-        long n = arr.length+1;
-        long sum =0;
+    static int findMissingNumber(int[] arr) {
 
-        for(int i=0;i<arr.length;i++){
-            sum +=arr[i];
+        long n = arr.length + 1;
+        long sum = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
         }
-        long expectedSum = n *(n+1)/2;
+        long expectedSum = n * (n + 1) / 2;
 
 
-        return  (int) (expectedSum-sum);
+        return (int) (expectedSum - sum);
 
     }
 
+//    public static int findMaxConsecutiveOnes(int[] nums) {
+//
+//        int count = 0;
+//        int max = 0;
+//
+//        for (int i = 0; i < nums.length; i++) {
+//            if   (nums[i] == 0) count = 0;
+//            else count++;
+//            if (max < count) {
+//                max = count;
+//            }
+//        }
+//        return max;
+//    }
+
+    public static int findMaxConsecutiveOnes(int[] nums) {
+        int count = 0;
+        int max = 0;
+        for (int num : nums) {
+
+            if (num == 1) {
+                count++;
+                max = Math.max(count, max);
+            } else {
+                count = 0;
+            }
+
+        }
+        return max;
+    }
 }
