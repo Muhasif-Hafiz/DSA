@@ -16,8 +16,8 @@ public class EasyArray {
 //        System.out.println(Arrays.toString(ans));
         // int [] ans=  unionArrayOptimal(nums1, nums2);
 
-        int[] arr = {4,1,2,1,2};
-        System.out.println(singleNumber(arr));
+        int[] arr = {3};
+        System.out.println(longestSubarray(arr, 3));
 
     }
 
@@ -326,6 +326,60 @@ public class EasyArray {
             sum = sum ^nums[i];
         }
         return sum;
+    }
+    public static int longestSubarrayBrute(int[] nums, int k) {
+
+        int maxLen =0;
+        for(int i=0;i<nums.length;i++){
+            int sum =0;
+            for(int j=i;j<nums.length;j++){
+                sum +=nums[j];
+
+                if(sum == k){
+                    maxLen = Math.max(maxLen, (j-i+1));
+                    break;
+                }
+            }
+        }
+        return maxLen;
+    }
+    public static int longestSubarrayTy(int[] nums, int k) {
+
+
+       int i=0; int j=1;
+       int maxLen=0;
+        long  sum =nums[i];
+
+       while(i<nums.length && j< nums.length){
+
+           sum +=nums[j];
+           j++;
+           if(sum ==k){
+               sum -=nums[i];
+               i++;
+               maxLen = Math.max(maxLen, (j-i+1));
+           }
+       }
+       return maxLen;
+    }
+    public static int longestSubarray(int[] nums, int k) {
+
+
+        int i=0; int j=1;
+        int maxLen=0;
+        long  sum =nums[i];
+
+        while(i<nums.length && j< nums.length){
+
+            sum +=nums[j];
+            j++;
+            if(sum ==k){
+                sum -=nums[i];
+                i++;
+                maxLen = Math.max(maxLen, (j-i+1));
+            }
+        }
+        return maxLen;
     }
 
 }
