@@ -1,6 +1,7 @@
 package arrays.easy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class EasyArray {
@@ -16,8 +17,8 @@ public class EasyArray {
 //        System.out.println(Arrays.toString(ans));
         // int [] ans=  unionArrayOptimal(nums1, nums2);
 
-        int[] arr = {3};
-        System.out.println(longestSubarray(arr, 3));
+        int[] arr = {2,0,0,3};
+        System.out.println(longestSubarray(arr, 2));
 
     }
 
@@ -343,42 +344,54 @@ public class EasyArray {
         }
         return maxLen;
     }
-    public static int longestSubarrayTy(int[] nums, int k) {
-
-
-       int i=0; int j=1;
-       int maxLen=0;
-        long  sum =nums[i];
-
-       while(i<nums.length && j< nums.length){
-
-           sum +=nums[j];
-           j++;
-           if(sum ==k){
-               sum -=nums[i];
-               i++;
-               maxLen = Math.max(maxLen, (j-i+1));
-           }
-       }
-       return maxLen;
-    }
     public static int longestSubarray(int[] nums, int k) {
 
 
-        int i=0; int j=1;
-        int maxLen=0;
+       int i=0; int j=0;
+       int maxLen=0;
         long  sum =nums[i];
 
-        while(i<nums.length && j< nums.length){
+       while(j< nums.length){
 
-            sum +=nums[j];
-            j++;
-            if(sum ==k){
-                sum -=nums[i];
-                i++;
-                maxLen = Math.max(maxLen, (j-i+1));
+           while(i<=j && sum>k){
+               sum -=nums[i];
+               i++;
+           }
+
+           if(sum ==k){
+               maxLen = Math.max(maxLen, j-i+1);
+           }
+           j++;
+           if(j<nums.length) sum +=nums[j];
+
+       }
+       return maxLen;
+    }
+    public static int longestSubarrayBetter(int[] nums, int k) {
+
+        int maxLen = 0;
+        int sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++) {
+
+            sum += nums[i];
+
+            if(sum == k) {
+                maxLen = i + 1;
+            }
+
+            int rem = sum - k;
+
+            if(map.containsKey(rem)) {
+                maxLen = Math.max(maxLen, i - map.get(rem));
+            }
+
+            if(!map.containsKey(sum)) {
+                map.put(sum, i);
             }
         }
+
         return maxLen;
     }
 
