@@ -11,7 +11,7 @@ public class MediumArray {
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
         int []arr ={1,2,0,1,2,0,0};
-        sortColorsBetter(arr);
+        sortColors(arr);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -128,5 +128,34 @@ public class MediumArray {
 //            nums[k++] = entry.getKey();
 //        }
 //    }
+
+    public static void sortColors(int [] nums){
+        int low =0;
+        int mid =0;
+        int high =nums.length-1;
+
+        while (mid<=high){
+            if(nums[mid]==0){
+                swap(nums, low, mid);
+                low++;
+                mid++;
+
+            } else if(nums[mid]==1){
+                mid++;
+
+            }else{
+                swap(nums, mid, high);
+                high--;
+
+            }
+        }
+
+    }
+    static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 
 }
