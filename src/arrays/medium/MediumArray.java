@@ -2,12 +2,17 @@ package arrays.medium;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MediumArray {
     static void main() {
 
-        int[] arr = {3, 2, 4};
-        System.out.println(Arrays.toString(twoSum(arr, 6)));
+//        int[] arr = {3, 2, 4};
+//        System.out.println(Arrays.toString(twoSum(arr, 6)));
+
+        int []arr ={1,2,0,1,2,0,0};
+        sortColorsBetter(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -85,5 +90,43 @@ public class MediumArray {
         // incomplete
 
     }
-    //Binary S
+    public static void sortColorsBrute(int[] nums) {
+
+        int count0=0;
+        int count1=0;
+        int count2 =0;
+        int k=0;
+
+        for(int i=0;i<nums.length;i++){
+
+            if(nums[i]== 0) count0++;
+            else if(nums[i]==1) count1++;
+            else count2++;
+
+        }
+
+        for(int i=0;i<count0;i++){
+            nums[k++]=0;
+        }
+        for(int i=0;i<count1;i++){
+            nums[k++]=1;
+        }
+        for(int i=0;i<count2;i++){
+            nums[k++]=2;
+        }
+    }
+//    public static void sortColorsBetter(int[] nums){
+//
+//        HashMap<Integer, Integer> map = new HashMap<>();
+//        int k=0;
+//
+//        for(int i=0;i< nums.length;i++){
+//            map.put(nums[i],map.getOrDefault(nums[i], 0) +1);
+//        }
+//        for(Map.Entry<Integer, Integer>  entry : map.entrySet()){
+//
+//            nums[k++] = entry.getKey();
+//        }
+//    }
+
 }
