@@ -10,9 +10,9 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {7, 0, 0, 1, 7, 7, 2, 7, 7};
+        int[] arr = {9,0,4,1,9,3,1,1,1,1,1,1};
       //  sortColors(arr);
-        System.out.println(majorityElementBetter(arr));
+        System.out.println(majorityElement(arr));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -196,5 +196,22 @@ public class MediumArray {
         return -1;
     }
 
+    public static int  majorityElement(int[] nums) {
 
+        int candidate =0;
+        int count =0;
+
+        for(int num : nums){
+            if(count==0){
+                candidate = num;
+            }
+
+            if(candidate == num){
+                count++;
+            }else{
+                count--;
+            }
+        }
+        return  candidate;
+    }
 }
