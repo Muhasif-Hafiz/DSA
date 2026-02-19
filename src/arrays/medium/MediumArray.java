@@ -10,9 +10,11 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {9,0,4,1,9,3,1,1,1,1,1,1};
+        int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
       //  sortColors(arr);
-        System.out.println(majorityElement(arr));
+      //  System.out.println(maxSubArray(arr));
+        int [] ans = maxSubArrayPart(arr);
+        System.out.println(Arrays.toString(ans));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -213,5 +215,66 @@ public class MediumArray {
             }
         }
         return  candidate;
+    }
+    public static int maxSubArrayBrute(int[] nums) {
+        int maximum = Integer.MIN_VALUE;
+
+        for(int i=0;i<nums.length;i++){
+
+            int sum = 0;
+
+            for(int j=i;j< nums.length;j++){
+
+                sum +=nums[j];
+
+                maximum = Math.max(sum, maximum);
+            }
+        }
+        return maximum;
+    }
+    public static int maxSubArray(int[] nums) {
+
+        long sum = 0;
+        long maximum = Long.MIN_VALUE;
+
+
+        for(int i=0;i<nums.length;i++){
+
+            sum +=nums[i];
+            if(sum >maximum){
+                maximum = sum;
+            }
+
+            if(sum<0){
+                sum =0;
+            }
+        }
+        return (int)maximum;
+    }
+    public static int [] maxSubArrayPart(int[] nums) {
+
+        long sum = 0;
+        long maximum = Long.MIN_VALUE;
+        int start =0;
+        int ansStart =-1;
+        int ansEnd = -1;
+
+        for(int i=0;i<nums.length;i++){
+            if(sum ==0){
+                start =i;
+            }
+
+            sum +=nums[i];
+            if(sum >maximum){
+                maximum = sum;
+                ansStart = start;
+                ansEnd = i;
+            }
+
+            if(sum<0){
+                sum =0;
+            }
+        }
+        return  new int [] {ansStart, ansEnd};
     }
 }
