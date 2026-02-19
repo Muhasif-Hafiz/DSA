@@ -10,11 +10,11 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
-      //  sortColors(arr);
-      //  System.out.println(maxSubArray(arr));
-        int [] ans = maxSubArrayPart(arr);
-        System.out.println(Arrays.toString(ans));
+        int[] arr = {7, 6, 4, 3, 1};
+        //  sortColors(arr);
+        System.out.println(maxProfitBrute(arr));
+//        int [] ans = maxSubArrayPart(arr);
+//        System.out.println(Arrays.toString(ans));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -164,16 +164,16 @@ public class MediumArray {
     public static int majorityElementBrute(int[] nums) {
         int n = nums.length;
 
-        int majority = n/2;
-        for(int i=0;i<n;i++){
-            int count=0;
+        int majority = n / 2;
+        for (int i = 0; i < n; i++) {
+            int count = 0;
 
-            for(int j=0;j<n;j++){
-                if(nums[i]== nums[j]){
+            for (int j = 0; j < n; j++) {
+                if (nums[i] == nums[j]) {
                     count++;
                 }
             }
-            if(count>majority){
+            if (count > majority) {
                 return nums[i];
             }
 
@@ -182,99 +182,127 @@ public class MediumArray {
         return -1;
 
     }
+
     public static int majorityElementBetter(int[] nums) {
         HashMap<Integer, Integer> map = new HashMap<>();
-        int majority= nums.length/2;
+        int majority = nums.length / 2;
 
-        for(int i=0;i< nums.length;i++){
-            map.put(nums[i],map.getOrDefault(nums[i], 0)+1 );
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
 
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
-            if(entry.getValue()>majority){
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > majority) {
                 return entry.getKey();
             }
         }
         return -1;
     }
 
-    public static int  majorityElement(int[] nums) {
+    public static int majorityElement(int[] nums) {
 
-        int candidate =0;
-        int count =0;
+        int candidate = 0;
+        int count = 0;
 
-        for(int num : nums){
-            if(count==0){
+        for (int num : nums) {
+            if (count == 0) {
                 candidate = num;
             }
 
-            if(candidate == num){
+            if (candidate == num) {
                 count++;
-            }else{
+            } else {
                 count--;
             }
         }
-        return  candidate;
+        return candidate;
     }
+
     public static int maxSubArrayBrute(int[] nums) {
         int maximum = Integer.MIN_VALUE;
 
-        for(int i=0;i<nums.length;i++){
+        for (int i = 0; i < nums.length; i++) {
 
             int sum = 0;
 
-            for(int j=i;j< nums.length;j++){
+            for (int j = i; j < nums.length; j++) {
 
-                sum +=nums[j];
+                sum += nums[j];
 
                 maximum = Math.max(sum, maximum);
             }
         }
         return maximum;
     }
+
     public static int maxSubArray(int[] nums) {
 
         long sum = 0;
         long maximum = Long.MIN_VALUE;
 
 
-        for(int i=0;i<nums.length;i++){
+        for (int i = 0; i < nums.length; i++) {
 
-            sum +=nums[i];
-            if(sum >maximum){
+            sum += nums[i];
+            if (sum > maximum) {
                 maximum = sum;
             }
 
-            if(sum<0){
-                sum =0;
+            if (sum < 0) {
+                sum = 0;
             }
         }
-        return (int)maximum;
+        return (int) maximum;
     }
-    public static int [] maxSubArrayPart(int[] nums) {
+
+    public static int[] maxSubArrayPart(int[] nums) {
 
         long sum = 0;
         long maximum = Long.MIN_VALUE;
-        int start =0;
-        int ansStart =-1;
+        int start = 0;
+        int ansStart = -1;
         int ansEnd = -1;
 
-        for(int i=0;i<nums.length;i++){
-            if(sum ==0){
-                start =i;
+        for (int i = 0; i < nums.length; i++) {
+            if (sum == 0) {
+                start = i;
             }
 
-            sum +=nums[i];
-            if(sum >maximum){
+            sum += nums[i];
+            if (sum > maximum) {
                 maximum = sum;
                 ansStart = start;
                 ansEnd = i;
             }
 
-            if(sum<0){
-                sum =0;
+            if (sum < 0) {
+                sum = 0;
             }
         }
-        return  new int [] {ansStart, ansEnd};
+        return new int[]{ansStart, ansEnd};
+    }
+
+    public static int maxProfitBrute(int[] prices) {
+
+        int maxProfit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = i; j < prices.length; j++) {
+
+                int sellingPrice = prices[j] - prices[i];
+                maxProfit = Math.max(sellingPrice, maxProfit);
+            }
+        }
+        return maxProfit;
+    }
+
+    public static int maxProfit(int[] prices) {
+
+        int maxProfit =0;
+        int sellingPrice =0;
+        int buyingPrice =0;
+
+        for(int i=0;i<prices.length;i++){
+            buyingPrice =
+        }
     }
 }
