@@ -10,9 +10,9 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {7, 6, 4, 3, 1};
+        int[] arr = {3, 8, 1, 4, 6, 2};
         //  sortColors(arr);
-        System.out.println(maxProfitBrute(arr));
+        System.out.println(maxProfit(arr));
 //        int [] ans = maxSubArrayPart(arr);
 //        System.out.println(Arrays.toString(ans));
     }
@@ -295,14 +295,56 @@ public class MediumArray {
         return maxProfit;
     }
 
-    public static int maxProfit(int[] prices) {
+    public static int maxProfitBetter(int[] prices) {
 
+        //       [ 7, 1, 5, 3, 6, 4 ]
+
+        int minIndex =-1;
+        int buyingDay =Integer.MAX_VALUE;
         int maxProfit =0;
-        int sellingPrice =0;
-        int buyingPrice =0;
+
 
         for(int i=0;i<prices.length;i++){
-            buyingPrice =
+
+            if(prices[i]<buyingDay){
+                buyingDay = prices[i];
+                minIndex =i;
+            }
         }
+
+        for(int i=minIndex;i<prices.length;i++){
+
+            maxProfit = Math.max(maxProfit, prices[i]-prices[minIndex]);
+
+        }
+        return maxProfit;
     }
+
+    public static int maxProfit(int [] prices){
+
+        int buying =0;
+        int transactions =0;
+
+        //       [ 7, 1, 5, 3, 6, 4 ]
+
+        for(int i=0;i<prices.length;i++){
+
+            if(buying==0){
+                buying = prices[i];
+                continue;
+            }
+
+            if(prices[i]- buying<0){
+                buying =prices[i];
+
+            }else{
+                transactions = Math.max(transactions, prices[i]-buying);
+            }
+
+
+        }
+        return transactions;
+    }
+
+
 }
