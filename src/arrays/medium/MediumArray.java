@@ -322,28 +322,19 @@ public class MediumArray {
 
     public static int maxProfit(int [] prices){
 
-        int buying =0;
-        int transactions =0;
-
-        //       [ 7, 1, 5, 3, 6, 4 ]
+        int minPrice =prices[0];
+        int maxProfit =0;
 
         for(int i=0;i<prices.length;i++){
 
-            if(buying==0){
-                buying = prices[i];
-                continue;
-            }
-
-            if(prices[i]- buying<0){
-                buying =prices[i];
-
+            if(prices[i]<minPrice){
+                minPrice =prices[i];
             }else{
-                transactions = Math.max(transactions, prices[i]-buying);
+                maxProfit = Math.max(maxProfit, prices[i]-minPrice);
             }
-
 
         }
-        return transactions;
+        return maxProfit;
     }
 
 
