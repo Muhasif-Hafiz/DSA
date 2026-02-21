@@ -10,11 +10,12 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {3, 8, 1, 4, 6, 2};
+        int[] arr = {1,2,-4,-5};
+        int [] ans = rearrangeArrayBrute(arr);
         //  sortColors(arr);
-        System.out.println(maxProfit(arr));
+//        System.out.println(maxProfit(arr));
 //        int [] ans = maxSubArrayPart(arr);
-//        System.out.println(Arrays.toString(ans));
+        System.out.println(Arrays.toString(ans));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -336,6 +337,31 @@ public class MediumArray {
         }
         return maxProfit;
     }
+    public static int[] rearrangeArrayBrute(int[] nums) {
 
+        int [] posArray = new int[nums.length/2];
+        int [] negArray = new int[nums.length/2];
+        int negIndex=0;
+        int posIndex =0;
 
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < 0) {
+                negArray[negIndex++] = nums[i];
+            } else {
+                posArray[posIndex++] = nums[i];
+            }
+        }
+
+        int newIndex =0;
+        int newNegIndex =0;
+        int newPosIndex =0;
+
+        while(newIndex< nums.length){
+            nums[newIndex] = posArray[newPosIndex++];
+            newIndex++;
+            nums[newIndex] = negArray[newNegIndex++];
+            newIndex++;
+        }
+        return nums;
+    }
 }
