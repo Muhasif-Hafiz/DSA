@@ -10,8 +10,8 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {1,2,-4,-5};
-        int [] ans = rearrangeArrayBrute(arr);
+        int[] arr = {1, 2, -3, -1, -2, 3};
+        int[] ans = rearrangeArray(arr);
         //  sortColors(arr);
 //        System.out.println(maxProfit(arr));
 //        int [] ans = maxSubArrayPart(arr);
@@ -300,49 +300,50 @@ public class MediumArray {
 
         //       [ 7, 1, 5, 3, 6, 4 ]
 
-        int minIndex =-1;
-        int buyingDay =Integer.MAX_VALUE;
-        int maxProfit =0;
+        int minIndex = -1;
+        int buyingDay = Integer.MAX_VALUE;
+        int maxProfit = 0;
 
 
-        for(int i=0;i<prices.length;i++){
+        for (int i = 0; i < prices.length; i++) {
 
-            if(prices[i]<buyingDay){
+            if (prices[i] < buyingDay) {
                 buyingDay = prices[i];
-                minIndex =i;
+                minIndex = i;
             }
         }
 
-        for(int i=minIndex;i<prices.length;i++){
+        for (int i = minIndex; i < prices.length; i++) {
 
-            maxProfit = Math.max(maxProfit, prices[i]-prices[minIndex]);
+            maxProfit = Math.max(maxProfit, prices[i] - prices[minIndex]);
 
         }
         return maxProfit;
     }
 
-    public static int maxProfit(int [] prices){
+    public static int maxProfit(int[] prices) {
 
-        int minPrice =prices[0];
-        int maxProfit =0;
+        int minPrice = prices[0];
+        int maxProfit = 0;
 
-        for(int i=0;i<prices.length;i++){
+        for (int i = 0; i < prices.length; i++) {
 
-            if(prices[i]<minPrice){
-                minPrice =prices[i];
-            }else{
-                maxProfit = Math.max(maxProfit, prices[i]-minPrice);
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            } else {
+                maxProfit = Math.max(maxProfit, prices[i] - minPrice);
             }
 
         }
         return maxProfit;
     }
+
     public static int[] rearrangeArrayBrute(int[] nums) {
 
-        int [] posArray = new int[nums.length/2];
-        int [] negArray = new int[nums.length/2];
-        int negIndex=0;
-        int posIndex =0;
+        int[] posArray = new int[nums.length / 2];
+        int[] negArray = new int[nums.length / 2];
+        int negIndex = 0;
+        int posIndex = 0;
 
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] < 0) {
@@ -352,16 +353,68 @@ public class MediumArray {
             }
         }
 
-        int newIndex =0;
-        int newNegIndex =0;
-        int newPosIndex =0;
+        int newIndex = 0;
+        int newNegIndex = 0;
+        int newPosIndex = 0;
 
-        while(newIndex< nums.length){
+        while (newIndex < nums.length) {
             nums[newIndex] = posArray[newPosIndex++];
             newIndex++;
             nums[newIndex] = negArray[newNegIndex++];
             newIndex++;
         }
         return nums;
+    }
+
+    public static int[] rearrangeArrayTry(int[] nums) {
+
+        int pos = 0;
+        int neg = 1;
+
+        while (neg < nums.length && pos < nums.length - 1) {
+
+            if (nums[pos] > 0) {
+                if (pos < nums.length - 2) {
+                    pos += 2;
+                } else {
+                    break;
+                }
+            }
+            ;
+            if (nums[neg] < 0) {
+                if (neg < nums.length - 1) {
+                    neg += 2;
+                } else {
+                    break;
+                }
+            }
+
+
+            if (nums[pos] < 0 && nums[neg] > 0) {
+                swap(nums, pos, neg);
+            }
+        }
+        return nums;
+    }
+
+    public static int[] rearrangeArray(int[] nums) {
+
+        int[] result = new int[nums.length];
+
+        int neg = 1;
+        int pos = 0;
+
+        for (int num : nums) {
+            if (num > 0) {
+                result[pos] = num;
+                pos += 2;
+
+            } else {
+                result[neg] = num;
+                neg += 2;
+            }
+        }
+        return result;
+
     }
 }
