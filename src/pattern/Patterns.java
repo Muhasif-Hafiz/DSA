@@ -1,7 +1,7 @@
 package pattern;
 
 public class Patterns {
-     static void main(String[] args) {
+    static void main(String[] args) {
 
         //squarePattern(5,5);
         // trianglePattern(5);
@@ -19,7 +19,7 @@ public class Patterns {
         // increasingLetterTrianglePattern(5);
         //inverseIncreasingLetterTrianglePattern(5);
         //LetterTrianglePattern(5);
-         numberPattern(4);
+        numberPattern(4);
     }
 
     static void squarePattern(int row, int column) {
@@ -204,32 +204,30 @@ public class Patterns {
 
     // NOW WE WILL MOVE TO THE MOST TOUGH QUESTION OF PATTERNS -- THE NUMBER PATTERN
 
-    static void numberPattern(int row){
-         int size =(2 * row) -1;
+    static void numberPattern(int row) {
+        int size = (2 * row) - 1;
 
-         for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
 
-             for(int j=0;j<size;j++){
-                 int number = minimumDistance(i, j, row);
-                 System.out.print(number + "  ");
+            for (int j = 0; j < size; j++) {
+                int number = minimumDistance(i, j, row);
+                System.out.print(number + "  ");
 
-             }
-             System.out.println();
+            }
+            System.out.println();
 
-         }
-
+        }
 
 
     }
 
-    static int minimumDistance(int i, int j, int row)
-    {
-         int size =(2 *row)-1;
+    static int minimumDistance(int i, int j, int row) {
+        int size = (2 * row) - 1;
 
-         int left = row - j;  // 0
-         int top = row -i; // 0
-         int right = row -(size-1 -j); // 4 -(7-4) = 1
-         int bottom = row -(size-1 -i); //  1
+        int left = row - j;
+        int top = row - i;
+        int right = row - (size - 1 - j);
+        int bottom = row - (size - 1 - i);
 
         return Math.max(Math.max(left, top), Math.max(right, bottom));
     }

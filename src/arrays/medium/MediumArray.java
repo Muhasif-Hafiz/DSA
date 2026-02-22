@@ -10,12 +10,13 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {1, 2, -3, -1, -2, 3};
-        int[] ans = rearrangeArray(arr);
+        int[] arr = {1, 2, 3};
+
         //  sortColors(arr);
 //        System.out.println(maxProfit(arr));
 //        int [] ans = maxSubArrayPart(arr);
-        System.out.println(Arrays.toString(ans));
+        nextPermutation(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -415,6 +416,55 @@ public class MediumArray {
             }
         }
         return result;
+
+    }
+
+    // [1,2,3] [2,1,3] [3,2,1] [1,3,2]
+
+    static void allPermutations(int [] arr){
+
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr.length;j++){
+                swap(arr, i, j);
+                System.out.println(Arrays.toString(arr));
+            }
+        }
+    }
+    public static void nextPermutation(int[] nums) {
+        int index =-1;
+        int n = nums.length;
+
+        for(int i=n-2; i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                index = i;
+                break;
+            }
+        }
+
+        if(index ==-1){
+            reverse(nums, 0, n);
+            return;
+        }
+        for(int i=  n-1;i>index;i--){
+            if(nums[i]> nums[index]){
+                swap(nums, i, index);
+                break;
+            }
+        }
+
+
+        reverse(nums, index+1, n-1);
+
+    }
+    static void reverse(int[] arr, int low, int high) {
+
+        int mid = low + (high - 1) / 2;
+
+        while (low <= mid && low < high) {
+            swap(arr, low, high);
+            low++;
+            high--;
+        }
 
     }
 }
