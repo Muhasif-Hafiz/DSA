@@ -1,9 +1,6 @@
 package arrays.medium;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 public class MediumArray {
     static void main() {
@@ -11,15 +8,17 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
+        int[] arr = {-3, 4, 5, 1, -4, -5};
 
         //  sortColors(arr);
 //        System.out.println(maxProfit(arr));
 //        int [] ans = maxSubArrayPart(arr);
 //        nextPermutation(arr);
 
+        List<Integer> list = leaders(arr);
 
-        System.out.println(longestConsecutive(arr));
+
+        System.out.println(list);
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -522,5 +521,21 @@ public class MediumArray {
 
         return longest;
 
+    }
+    public static List<Integer> leaders(int[] nums) {
+
+        List<Integer> list = new ArrayList<>();
+
+        for(int i=0;i<nums.length;i++){
+
+            boolean isLeader = true;
+            for(int j=i; j<nums.length;j++){
+
+                if(nums[i] <nums[j]) isLeader = false;
+            }
+            if(isLeader)list.add(nums[i] );
+        }
+
+        return list;
     }
 }
