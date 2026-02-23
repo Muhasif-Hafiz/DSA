@@ -2,6 +2,7 @@ package arrays.medium;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class MediumArray {
@@ -10,13 +11,15 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {1, 2, 3};
+        int[] arr = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
 
         //  sortColors(arr);
 //        System.out.println(maxProfit(arr));
 //        int [] ans = maxSubArrayPart(arr);
-        nextPermutation(arr);
-        System.out.println(Arrays.toString(arr));
+//        nextPermutation(arr);
+
+
+        System.out.println(longestConsecutive(arr));
     }
 
     public static int[] twoSumBrute(int[] nums, int target) {
@@ -421,41 +424,43 @@ public class MediumArray {
 
     // [1,2,3] [2,1,3] [3,2,1] [1,3,2]
 
-    static void allPermutations(int [] arr){
+    static void allPermutations(int[] arr) {
 
-        for(int i=0;i<arr.length;i++){
-            for(int j=0;j<arr.length;j++){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
                 swap(arr, i, j);
                 System.out.println(Arrays.toString(arr));
             }
         }
     }
+
     public static void nextPermutation(int[] nums) {
-        int index =-1;
+        int index = -1;
         int n = nums.length;
 
-        for(int i=n-2; i>=0;i--){
-            if(nums[i]<nums[i+1]){
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
                 index = i;
                 break;
             }
         }
 
-        if(index ==-1){
+        if (index == -1) {
             reverse(nums, 0, n);
             return;
         }
-        for(int i=  n-1;i>index;i--){
-            if(nums[i]> nums[index]){
+        for (int i = n - 1; i > index; i--) {
+            if (nums[i] > nums[index]) {
                 swap(nums, i, index);
                 break;
             }
         }
 
 
-        reverse(nums, index+1, n-1);
+        reverse(nums, index + 1, n - 1);
 
     }
+
     static void reverse(int[] arr, int low, int high) {
 
         int mid = low + (high - 1) / 2;
@@ -465,6 +470,57 @@ public class MediumArray {
             low++;
             high--;
         }
+
+    }
+
+    public static int longestConsecutiveBetter(int[] nums) {
+
+        // T.C -> 0(NLogN + N)
+
+        int longest = Integer.MIN_VALUE;
+
+        Arrays.sort(nums);
+        int count = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i + 1] - 1) {
+                count++;
+                longest = Math.max(longest, count);
+            } else {
+                count = 1;
+            }
+        }
+        return longest;
+
+    }
+
+    public static int longestConsecutive(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        int longest = 0;
+
+        for (int num : nums) {
+            set.add(num);
+        }
+
+
+        for (int element : set) {
+
+            if (!set.contains(element - 1)) {
+
+                int currentNum = element;
+                int count = 1;
+
+                while (set.contains(currentNum + 1)) {
+                    currentNum++;
+                    count++;
+                }
+
+                longest = Math.max(longest, count);
+            }
+        }
+
+        return longest;
 
     }
 }
