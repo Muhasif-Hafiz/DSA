@@ -8,7 +8,7 @@ public class MediumArray {
 //        int[] arr = {3, 2, 4};
 //        System.out.println(Arrays.toString(twoSum(arr, 6)));
 
-        int[] arr = {-3, 4, 5, 1, -4, -5};
+        int[] arr = {16, 17, 4, 3, 5, 2};
 
         //  sortColors(arr);
 //        System.out.println(maxProfit(arr));
@@ -522,7 +522,7 @@ public class MediumArray {
         return longest;
 
     }
-    public static List<Integer> leaders(int[] nums) {
+    public static List<Integer> leadersBrute(int[] nums) {
 
         List<Integer> list = new ArrayList<>();
 
@@ -537,5 +537,23 @@ public class MediumArray {
         }
 
         return list;
+    }
+    public static List<Integer> leaders(int[] nums) {
+        int n = nums.length;
+        List<Integer> list = new ArrayList<>();
+        int maxRight = nums[n-1];
+        list.add(maxRight);
+
+        for(int i= n-2 ;i>=0;i--){
+            if(nums[i]>maxRight) {
+                maxRight = nums[i];
+                list.add(maxRight);
+            }
+
+        }
+
+        Collections.reverse(list);
+        return list;
+
     }
 }
