@@ -21,9 +21,9 @@ public class MediumArray {
 //        System.out.println(list);
 
 
-        int[][] ans = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+        int[][] ans = {{0, 1, 0}, {1, 1, 1}, {1, 1, 1}};
 
-        setZeroesBruteForce(ans);
+        setZeroes(ans);
         for (int i = 0; i < ans.length; i++) {
             for (int j = 0; j < ans[0].length; j++) {
                 System.out.print(ans[i][j] + " ");
@@ -535,30 +535,32 @@ public class MediumArray {
         return longest;
 
     }
+
     public static List<Integer> leadersBrute(int[] nums) {
 
         List<Integer> list = new ArrayList<>();
 
-        for(int i=0;i<nums.length;i++){
+        for (int i = 0; i < nums.length; i++) {
 
             boolean isLeader = true;
-            for(int j=i; j<nums.length;j++){
+            for (int j = i; j < nums.length; j++) {
 
-                if(nums[i] <nums[j]) isLeader = false;
+                if (nums[i] < nums[j]) isLeader = false;
             }
-            if(isLeader)list.add(nums[i] );
+            if (isLeader) list.add(nums[i]);
         }
 
         return list;
     }
+
     public static List<Integer> leaders(int[] nums) {
         int n = nums.length;
         List<Integer> list = new ArrayList<>();
-        int maxRight = nums[n-1];
+        int maxRight = nums[n - 1];
         list.add(maxRight);
 
-        for(int i= n-2 ;i>=0;i--){
-            if(nums[i]>maxRight) {
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] > maxRight) {
                 maxRight = nums[i];
                 list.add(maxRight);
             }
@@ -569,6 +571,7 @@ public class MediumArray {
         return list;
 
     }
+
     public static void setZeroesBruteForce(int[][] matrix) {
 
         int rows = matrix.length;
@@ -597,14 +600,64 @@ public class MediumArray {
             }
         }
     }
-    static void alterMatrix(int [] [] result, int i, int j){
 
-        for(int row =0;row<result.length;row++){
-            for(int col =0; col <result[0].length;col++){
+    static void alterMatrix(int[][] result, int i, int j) {
 
-                if(row ==i || col ==j ){
-                    result[row][col] =0;
+        for (int row = 0; row < result.length; row++) {
+            for (int col = 0; col < result[0].length; col++) {
+
+                if (row == i || col == j) {
+                    result[row][col] = 0;
                 }
+            }
+        }
+
+    }
+
+    public static void setZeroes(int[][] matrix) {
+
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int col0 = 1;
+
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+
+                if (matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    if (j != 0) {
+                        matrix[0][j] = 0;
+                    } else {
+                        col0 = 0;
+                    }
+                }
+
+            }
+        }
+
+
+        for (int i=1;i<n;i++){
+            for(int j=1;j<m;j++){
+
+                if(matrix[i][j]!=0){
+                    if(matrix[i][0] ==0|| matrix[0][j] ==0){
+                        matrix[i][j]=0;
+                    }
+                }
+            }
+        }
+
+        if(matrix[0][0]==0){
+            for(int j =0;j<m;j++){
+                matrix[0][j]=0;
+            }
+        }
+
+        if(col0 ==0){
+            for (int i = 0; i <n ; i++) {
+                matrix[i][0]=0;
+
             }
         }
 
