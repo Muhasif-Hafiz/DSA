@@ -21,9 +21,9 @@ public class MediumArray {
 //        System.out.println(list);
 
 
-        int[][] ans = {{0, 1, 0}, {1, 1, 1}, {1, 1, 1}};
+        int[][] ans =  {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 
-        setZeroes(ans);
+        rotate(ans);
         for (int i = 0; i < ans.length; i++) {
             for (int j = 0; j < ans[0].length; j++) {
                 System.out.print(ans[i][j] + " ");
@@ -659,6 +659,44 @@ public class MediumArray {
                 matrix[i][0]=0;
 
             }
+        }
+
+    }
+    public static void rotate(int[][] matrix) {
+        transpose(matrix);
+
+        for(int i=0;i<matrix.length;i++){
+            rotateMatrix(matrix, i);
+        }
+
+    }
+    public static  void transpose(int [] [] matrix){
+        int n = matrix.length;
+
+        for(int i=0; i<n-1;i++){
+
+            for(int j=i+1;j<n;j++){
+               int temp = matrix[i][j];
+               matrix[i][j] = matrix[j][i];
+               matrix[j][i] = temp;
+            }
+        }
+    }
+
+    public static  void rotateMatrix(int [] [] matrix, int index){
+
+        int start = 0;
+        int end = matrix.length-1;
+
+        while (start<end){
+            int temp = matrix[index][start];
+            matrix[index][start] = matrix[index][end];
+            matrix[index][end] = temp;
+
+
+            start++;
+            end--;
+
         }
 
     }
