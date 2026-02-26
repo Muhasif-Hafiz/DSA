@@ -21,16 +21,23 @@ public class MediumArray {
 //        System.out.println(list);
 
 
-        int[][] ans =  {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+       // int[][] ans = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
 
-        rotate(ans);
-        for (int i = 0; i < ans.length; i++) {
-            for (int j = 0; j < ans[0].length; j++) {
-                System.out.print(ans[i][j] + " ");
-            }
-            System.out.println();
-        }
+//        rotate(ans);
+//        for (int i = 0; i < ans.length; i++) {
+//            for (int j = 0; j < ans[0].length; j++) {
+//                System.out.print(ans[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
 
+//        List<Integer> list = spiralOrder(ans);
+//        System.out.println(list);
+
+
+        int [] arr = {1, -1, 1};
+     int ans =   subarraySum(arr, 1);
+        System.out.println(ans);
 
     }
 
@@ -637,58 +644,60 @@ public class MediumArray {
         }
 
 
-        for (int i=1;i<n;i++){
-            for(int j=1;j<m;j++){
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
 
-                if(matrix[i][j]!=0){
-                    if(matrix[i][0] ==0|| matrix[0][j] ==0){
-                        matrix[i][j]=0;
+                if (matrix[i][j] != 0) {
+                    if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                        matrix[i][j] = 0;
                     }
                 }
             }
         }
 
-        if(matrix[0][0]==0){
-            for(int j =0;j<m;j++){
-                matrix[0][j]=0;
+        if (matrix[0][0] == 0) {
+            for (int j = 0; j < m; j++) {
+                matrix[0][j] = 0;
             }
         }
 
-        if(col0 ==0){
-            for (int i = 0; i <n ; i++) {
-                matrix[i][0]=0;
+        if (col0 == 0) {
+            for (int i = 0; i < n; i++) {
+                matrix[i][0] = 0;
 
             }
         }
 
     }
+
     public static void rotate(int[][] matrix) {
         transpose(matrix);
 
-        for(int i=0;i<matrix.length;i++){
+        for (int i = 0; i < matrix.length; i++) {
             rotateMatrix(matrix, i);
         }
 
     }
-    public static  void transpose(int [] [] matrix){
+
+    public static void transpose(int[][] matrix) {
         int n = matrix.length;
 
-        for(int i=0; i<n-1;i++){
+        for (int i = 0; i < n - 1; i++) {
 
-            for(int j=i+1;j<n;j++){
-               int temp = matrix[i][j];
-               matrix[i][j] = matrix[j][i];
-               matrix[j][i] = temp;
+            for (int j = i + 1; j < n; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
             }
         }
     }
 
-    public static  void rotateMatrix(int [] [] matrix, int index){
+    public static void rotateMatrix(int[][] matrix, int index) {
 
         int start = 0;
-        int end = matrix.length-1;
+        int end = matrix.length - 1;
 
-        while (start<end){
+        while (start < end) {
             int temp = matrix[index][start];
             matrix[index][start] = matrix[index][end];
             matrix[index][end] = temp;
@@ -698,6 +707,102 @@ public class MediumArray {
             end--;
 
         }
+
+    }
+
+    public static List<Integer> spiralOrder(int[][] matrix) {
+
+        List<Integer> list = new ArrayList<>();
+
+        int left = 0;
+        int right = matrix[0].length - 1;
+        int top = 0;
+        int bottom = matrix.length - 1;
+
+        while (left <= right && top <= bottom) {
+
+            for (int i = left; i <= right; i++) {
+                list.add(matrix[top][i]);
+            }
+            top++;
+
+            for (int i = top; i <= bottom; i++) {
+                list.add(matrix[i][right]);
+
+            }
+            right--;
+
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    list.add(matrix[bottom][i]);
+                }
+                bottom--;
+            }
+
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    list.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+        return list;
+    }
+
+    public static int subarraySumForPositivesOnly(int[] nums, int k) {
+        if(nums.length==1) {
+            if(nums[0]==k) return 1;
+            else return 0;
+        }
+
+
+        int i=0;
+        int j=1;
+        long prefixSum = nums[0];
+        int n = nums.length;
+        int count =0;
+
+        while(i<n-1 && j<n){
+            prefixSum+=nums[j];
+
+            if(prefixSum == k){
+                count++;
+            }
+            while(prefixSum>k){
+                prefixSum -=nums[i];
+                i++;
+                if(prefixSum == k){
+                    count++;
+                }
+            }
+
+            j++;
+        }
+        return count;
+
+    }
+
+    public static int subarraySum(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        map.put(0,1);
+
+        int prefixSum =0;
+        int count =0;
+
+
+
+        for(int num : nums){
+
+            prefixSum+= num;
+
+
+            if(map.containsKey(prefixSum-k)){
+                count+=map.get(prefixSum-k);
+            }
+            map.put(prefixSum, map.getOrDefault(prefixSum, 0)+1);
+        }
+        return count;
 
     }
 }
