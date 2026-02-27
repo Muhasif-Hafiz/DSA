@@ -21,7 +21,7 @@ public class MediumArray {
 //        System.out.println(list);
 
 
-       // int[][] ans = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        // int[][] ans = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
 
 //        rotate(ans);
 //        for (int i = 0; i < ans.length; i++) {
@@ -35,9 +35,9 @@ public class MediumArray {
 //        System.out.println(list);
 
 
-        int [] arr = {1, -1, 1};
-     int ans =   subarraySum(arr, 1);
-        System.out.println(ans);
+//        int[] arr = {1, -1, 1};
+//        int ans = subarraySum(arr, 1);
+//        System.out.println(ans);
 
     }
 
@@ -750,28 +750,28 @@ public class MediumArray {
     }
 
     public static int subarraySumForPositivesOnly(int[] nums, int k) {
-        if(nums.length==1) {
-            if(nums[0]==k) return 1;
+        if (nums.length == 1) {
+            if (nums[0] == k) return 1;
             else return 0;
         }
 
 
-        int i=0;
-        int j=1;
+        int i = 0;
+        int j = 1;
         long prefixSum = nums[0];
         int n = nums.length;
-        int count =0;
+        int count = 0;
 
-        while(i<n-1 && j<n){
-            prefixSum+=nums[j];
+        while (i < n - 1 && j < n) {
+            prefixSum += nums[j];
 
-            if(prefixSum == k){
+            if (prefixSum == k) {
                 count++;
             }
-            while(prefixSum>k){
-                prefixSum -=nums[i];
+            while (prefixSum > k) {
+                prefixSum -= nums[i];
                 i++;
-                if(prefixSum == k){
+                if (prefixSum == k) {
                     count++;
                 }
             }
@@ -780,25 +780,26 @@ public class MediumArray {
         }
         return count;
 
-    } public static int subarraySum(int[] nums, int k) {
+    }
+
+    public static int subarraySum(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
 
-        map.put(0,1);
+        map.put(0, 1);
 
-        int prefixSum =0;
-        int count =0;
-
-
-
-        for(int num : nums){
-
-            prefixSum+= num;
+        int prefixSum = 0;
+        int count = 0;
 
 
-            if(map.containsKey(prefixSum-k)){
-                count+=map.get(prefixSum-k);
+        for (int num : nums) {
+
+            prefixSum += num;
+
+
+            if (map.containsKey(prefixSum - k)) {
+                count += map.get(prefixSum - k);
             }
-            map.put(prefixSum, map.getOrDefault(prefixSum, 0)+1);
+            map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
         }
         return count;
 
