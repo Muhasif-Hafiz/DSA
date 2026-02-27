@@ -7,8 +7,10 @@ public class ArraysHard {
     static void main() {
 
 
-        List<List<Integer>> list = generate(5);
-        System.out.println(list);
+//        List<List<Integer>> list = generate(5);
+//        System.out.println(list);
+
+        System.out.println(factorial(4,2));
     }
 
     public static List<List<Integer>> generate(int numRows) {
@@ -30,5 +32,17 @@ public class ArraysHard {
 
         }
         return outerList;
+    }
+
+    static int factorial(int n, int r){
+
+        long res = 1;
+
+        for(int i=0;i<r;i++){
+
+            res *= (n-i);
+            res /=i+1;
+        }
+        return (int) res;
     }
 }
