@@ -1,5 +1,6 @@
 package arrays.hard;
 
+import java.sql.Array;
 import java.util.*;
 
 public class ArraysHard {
@@ -7,7 +8,7 @@ public class ArraysHard {
 
 
         int[] arr = {1, 2, 1, 1, 3, 2, 2};
-        List<Integer> list = majorityElementBruteForce(arr);
+        List<Integer> list = majorityElement(arr);
         System.out.println(list);
 
         // System.out.println(factorial(4,2));
@@ -76,26 +77,59 @@ public class ArraysHard {
     }
 
     public static List<Integer> majorityElementBruteForce(int[] nums) {
-        List<Integer> list = new ArrayList<>();
-        HashSet<Integer> map = new HashSet<>();
-        int threshold = nums.length / 3;
+        HashSet<Integer> set = new HashSet<>();
 
         for (int i = 0; i < nums.length; i++) {
-
             int count = 0;
             for (int j = i; j < nums.length; j++) {
 
                 if (nums[i] == nums[j]) count++;
+                if (count > nums.length / 3) set.add(nums[i]);
 
-                if (count > threshold) {
-                    map.add(nums[i]);
-                }
             }
         }
-        for(int num : map){
-            list.add(num);
+
+        return new ArrayList<>(set);
+    }
+
+    public static List<Integer> majorityElement(int[] nums) {
+
+        int cnt1=0;
+        int cnt2=0;
+        int el1=0;
+        int el2=0;
+
+        for(int num : nums){
+            if(cnt1 ==0 && num != el2) {
+                el1 = num;
+                cnt1++;
+            }
+            else if(cnt2 ==0 && num !=el1){
+                el2= num;
+                cnt2++;
+            }
+            else if(num == el1) cnt1++;
+            else if (num ==el2) cnt2++;
+            else {
+                cnt1--;
+                cnt2--;
+            }
         }
-        return list;
+        cnt1 = 0;
+        cnt2 = 0;
+
+        for (int num : nums) {
+            if (num == el1) cnt1++;
+            else if (num == el2) cnt2++;
+        }
+
+        List<Integer> result = new ArrayList<>();
+        int n = nums.length;
+
+        if (cnt1 > n / 3) result.add(el1);
+        if (cnt2 > n / 3) result.add(el2);
+
+        return result;
 
     }
 }
