@@ -1,16 +1,16 @@
 package arrays.hard;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ArraysHard {
     static void main() {
 
 
-        List<List<Integer>> list = generate(5);
+        int[] arr = {1, 2, 1, 1, 3, 2, 2};
+        List<Integer> list = majorityElementBruteForce(arr);
         System.out.println(list);
 
-       // System.out.println(factorial(4,2));
+        // System.out.println(factorial(4,2));
     }
 
     public static List<List<Integer>> generatePascalBrute(int numRows) {
@@ -34,21 +34,22 @@ public class ArraysHard {
         return outerList;
     }
 
-    static int factorial(int n, int r){
+    static int factorial(int n, int r) {
 
         long res = 1;
 
-        for(int i=0;i<r;i++){
+        for (int i = 0; i < r; i++) {
 
-            res *= (n-i);
-            res /=i+1;
+            res *= (n - i);
+            res /= i + 1;
         }
         return (int) res;
     }
+
     public static List<List<Integer>> generate(int numRows) {
         List<List<Integer>> outerList = new ArrayList<>();
 
-        for(int i=1;i<=numRows;i++){
+        for (int i = 1; i <= numRows; i++) {
             List<Integer> inner = new ArrayList<>();
 
             inner = generateRow(i);
@@ -58,18 +59,43 @@ public class ArraysHard {
         return outerList;
 
     }
-    public static List<Integer> generateRow(int n){
+
+    public static List<Integer> generateRow(int n) {
         List<Integer> list = new ArrayList<>();
         list.add(1);
-        int res =1;
+        int res = 1;
 
-        for(int i=1;i<n;i++){
+        for (int i = 1; i < n; i++) {
 
-            res = res *(n -i);
-            res = res/i;
+            res = res * (n - i);
+            res = res / i;
 
             list.add(res);
         }
         return list;
+    }
+
+    public static List<Integer> majorityElementBruteForce(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        HashSet<Integer> map = new HashSet<>();
+        int threshold = nums.length / 3;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int count = 0;
+            for (int j = i; j < nums.length; j++) {
+
+                if (nums[i] == nums[j]) count++;
+
+                if (count > threshold) {
+                    map.add(nums[i]);
+                }
+            }
+        }
+        for(int num : map){
+            list.add(num);
+        }
+        return list;
+
     }
 }
