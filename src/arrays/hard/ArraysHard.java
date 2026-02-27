@@ -7,13 +7,13 @@ public class ArraysHard {
     static void main() {
 
 
-//        List<List<Integer>> list = generate(5);
-//        System.out.println(list);
+        List<List<Integer>> list = generate(5);
+        System.out.println(list);
 
-        System.out.println(factorial(4,2));
+       // System.out.println(factorial(4,2));
     }
 
-    public static List<List<Integer>> generate(int numRows) {
+    public static List<List<Integer>> generatePascalBrute(int numRows) {
         List<List<Integer>> outerList = new ArrayList<>();
         for (int i = 0; i < numRows; i++) {
             List<Integer> innerList = new ArrayList<>();
@@ -44,5 +44,32 @@ public class ArraysHard {
             res /=i+1;
         }
         return (int) res;
+    }
+    public static List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> outerList = new ArrayList<>();
+
+        for(int i=1;i<=numRows;i++){
+            List<Integer> inner = new ArrayList<>();
+
+            inner = generateRow(i);
+
+            outerList.add(inner);
+        }
+        return outerList;
+
+    }
+    public static List<Integer> generateRow(int n){
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        int res =1;
+
+        for(int i=1;i<n;i++){
+
+            res = res *(n -i);
+            res = res/i;
+
+            list.add(res);
+        }
+        return list;
     }
 }
