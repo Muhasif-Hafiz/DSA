@@ -1,14 +1,13 @@
 package arrays.hard;
 
-import java.sql.Array;
 import java.util.*;
 
 public class ArraysHard {
     static void main() {
 
 
-        int[] arr = {1, 2, 1, 1, 3, 2, 2};
-        List<Integer> list = majorityElement(arr);
+        int[] arr = {-1,0,1,2,-1,-4};
+        List<List<Integer>> list = threeSumBruteForce(arr);
         System.out.println(list);
 
         // System.out.println(factorial(4,2));
@@ -94,22 +93,20 @@ public class ArraysHard {
 
     public static List<Integer> majorityElement(int[] nums) {
 
-        int cnt1=0;
-        int cnt2=0;
-        int el1=0;
-        int el2=0;
+        int cnt1 = 0;
+        int cnt2 = 0;
+        int el1 = 0;
+        int el2 = 0;
 
-        for(int num : nums){
-            if(cnt1 ==0 && num != el2) {
+        for (int num : nums) {
+            if (cnt1 == 0 && num != el2) {
                 el1 = num;
                 cnt1++;
-            }
-            else if(cnt2 ==0 && num !=el1){
-                el2= num;
+            } else if (cnt2 == 0 && num != el1) {
+                el2 = num;
                 cnt2++;
-            }
-            else if(num == el1) cnt1++;
-            else if (num ==el2) cnt2++;
+            } else if (num == el1) cnt1++;
+            else if (num == el2) cnt2++;
             else {
                 cnt1--;
                 cnt2--;
@@ -130,6 +127,30 @@ public class ArraysHard {
         if (cnt2 > n / 3) result.add(el2);
 
         return result;
+
+    }
+
+    public static List<List<Integer>> threeSumBruteForce(int[] nums) {
+
+        List<List<Integer>> outerList = new ArrayList<>();
+        HashSet<List<Integer>> set = new HashSet();
+
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;j<nums.length;j++){
+                for(int k=j+1;k<nums.length;k++){
+                    if(nums[i]+nums[j]+nums[k]== 0){
+                        List<Integer> innerList = new ArrayList<>();
+                        innerList.add(nums[i]);
+                        innerList.add(nums[j]);
+                        innerList.add(nums[k]);
+                        Collections.sort(innerList);
+                        set.add(innerList);
+                    }
+                }
+            }
+        }
+        outerList.addAll(set);
+        return outerList;
 
     }
 }

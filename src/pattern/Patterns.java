@@ -19,7 +19,7 @@ public class Patterns {
         // increasingLetterTrianglePattern(5);
         //inverseIncreasingLetterTrianglePattern(5);
         //LetterTrianglePattern(5);
-        numberPattern(4);
+        //numberPattern(4);
     }
 
     static void squarePattern(int row, int column) {
