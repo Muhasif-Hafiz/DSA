@@ -6,8 +6,8 @@ public class ArraysHard {
     static void main() {
 
 
-        int[] arr = {-1,0,1,2,-1,-4};
-        List<List<Integer>> list = threeSum(arr);
+        int[] arr = {1, 0, -1, 0, -2, 2};
+        List<List<Integer>> list = fourSum(arr, 0);
         System.out.println(list);
 
         // System.out.println(factorial(4,2));
@@ -156,31 +156,31 @@ public class ArraysHard {
 
     public static List<List<Integer>> threeSumBetter(int[] nums) {
         /*
-        *  T.C -> 0(N^2)
-        *  S.C -> 0(N^2)
-        *
-        *
-        * */
+         *  T.C -> 0(N^2)
+         *  S.C -> 0(N^2)
+         *
+         *
+         * */
 
 
         List<List<Integer>> outerList = new ArrayList<>();
         HashSet<List<Integer>> set = new HashSet();
 
 
-        for(int i=0;i<nums.length;i++){
-            HashMap<Integer,Integer> map =  new HashMap<>();
-            for(int j=i+1;j<nums.length;j++){
+        for (int i = 0; i < nums.length; i++) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            for (int j = i + 1; j < nums.length; j++) {
 
-                int number = nums[i]+ nums[j];
-                if(map.containsKey(number*-1)){
+                int number = nums[i] + nums[j];
+                if (map.containsKey(number * -1)) {
                     List<Integer> list = new ArrayList<>();
                     list.add(nums[i]);
-                    list.add(number*-1);
+                    list.add(number * -1);
                     list.add(nums[j]);
                     Collections.sort(list);
                     set.add(list);
-                }else{
-                    map.put(nums[j], map.getOrDefault(nums[j], 0)+1);
+                } else {
+                    map.put(nums[j], map.getOrDefault(nums[j], 0) + 1);
                 }
             }
         }
@@ -194,27 +194,58 @@ public class ArraysHard {
         Arrays.sort(nums);
 
 
-        for(int i=0;i<nums.length;i++){
-            if(i>0 && nums[i]==nums[i-1]) continue;
-            int j=i+1;
-            int k = nums.length-1;
-            while(j<k){
-                int sum = nums[i]+nums[j]+nums[k];
-                if(sum<0){
-                  j++;
-                } else if (sum>0) {
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            int j = i + 1;
+            int k = nums.length - 1;
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                if (sum < 0) {
+                    j++;
+                } else if (sum > 0) {
                     k--;
-                }
-                else {
-                    outerList.add(List.of(nums[i], nums[j],nums[k]));
+                } else {
+                    outerList.add(List.of(nums[i], nums[j], nums[k]));
                     j++;
                     k--;
-                    while (j<k && nums[j]== nums[j-1]) j++;
-                    while (j<k && nums[k]== nums[k+1]) k--;
+                    while (j < k && nums[j] == nums[j - 1]) j++;
+                    while (j < k && nums[k] == nums[k + 1]) k--;
                 }
             }
         }
         return outerList;
 
+    }
+
+    public static List<List<Integer>> fourSum(int[] arr, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(arr);
+
+        for (int i = 0; i < arr.length; i++) {
+            if (i > 0 && arr[i - 1] == arr[i]) continue;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (j > i + 1 && arr[j] == arr[j - 1]) continue;
+                int k = j + 1;
+                int l = arr.length - 1;
+                while (k < l) {
+                    int sum = arr[i] + arr[j] + arr[k] + arr[l];
+                    if (sum == target) {
+                        ans.add(List.of(arr[i], arr[j], arr[k], arr[l]));
+
+                        k++;
+                        l--;
+                    } else if (sum < target) {
+                        k++;
+                    } else {
+                        l--;
+                    }
+                    while (k < l && arr[k] == arr[k + 1]) k++;
+                    while (k < l && arr[l] == arr[l - 1]) l--;
+                }
+
+
+            }
+        }
+        return ans;
     }
 }
