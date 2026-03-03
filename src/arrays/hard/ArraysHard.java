@@ -277,12 +277,12 @@ public class ArraysHard {
             maxSum +=arr[i];
 
             if(map.containsKey(maxSum)){
-                int len =  i-map.get(maxSum);
+                int len =  (i+1)-map.get(maxSum);
                 count = Math.max(count, len);
             }else{
-                map.put(maxSum, i);
+                map.put(maxSum, i+1);
             }
         }
-        return count+1;
+        return count;
     }
 }
