@@ -11,7 +11,7 @@ public class ArraysHard {
 //        System.out.println(list);
 
         // System.out.println(factorial(4,2));
-        System.out.println(maxLen(arr));
+        System.out.println(maxLenBetter(arr));
     }
 
     public static List<List<Integer>> generatePascalBrute(int numRows) {
@@ -266,7 +266,7 @@ public class ArraysHard {
         }
         return count;
     }
-    public static int maxLen(int[] arr) {
+    public static int maxLenBetter(int[] arr) {
         HashMap<Integer, Integer> map =  new HashMap<>();
         int count =0;
         int maxSum =0;
