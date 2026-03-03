@@ -6,11 +6,12 @@ public class ArraysHard {
     static void main() {
 
 
-        int[] arr = {1, 0, -1, 0, -2, 2};
-        List<List<Integer>> list = fourSum(arr, 0);
-        System.out.println(list);
+        int[] arr = {15, -2, 2, -8, 1, 7, 10, 23};
+//        List<List<Integer>> list = fourSum(arr, 0);
+//        System.out.println(list);
 
         // System.out.println(factorial(4,2));
+        System.out.println(maxLen(arr));
     }
 
     public static List<List<Integer>> generatePascalBrute(int numRows) {
@@ -247,5 +248,41 @@ public class ArraysHard {
             }
         }
         return ans;
+    }
+    public static int maxLenBrute(int[] arr) {
+
+        int  count = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            long sum =0;
+            for (int j = i; j <arr.length ; j++) {
+
+                sum+=arr[j];
+                if(sum ==0){
+                    int minLength = j-i+1;
+                    count = Math.max(minLength, count);
+                }
+            }
+        }
+        return count;
+    }
+    public static int maxLen(int[] arr) {
+        HashMap<Integer, Integer> map =  new HashMap<>();
+        int count =0;
+        int maxSum =0;
+
+        map.put(0,0);
+
+        for(int i=0;i<arr.length;i++){
+            maxSum +=arr[i];
+
+            if(map.containsKey(maxSum)){
+                int len =  i-map.get(maxSum);
+                count = Math.max(count, len);
+            }else{
+                map.put(maxSum, i);
+            }
+        }
+        return count+1;
     }
 }
