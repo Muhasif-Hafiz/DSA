@@ -6,12 +6,12 @@ public class ArraysHard {
     static void main() {
 
 
-        int[] arr = {15, -2, 2, -8, 1, 7, 10, 23};
+        int[] arr = {5, 2, 9};
 //        List<List<Integer>> list = fourSum(arr, 0);
 //        System.out.println(list);
 
         // System.out.println(factorial(4,2));
-        System.out.println(maxLenBetter(arr));
+        System.out.println(subarraysWithXorK(arr, 7));
     }
 
     public static List<List<Integer>> generatePascalBrute(int numRows) {
@@ -249,38 +249,78 @@ public class ArraysHard {
         }
         return ans;
     }
+
     public static int maxLenBrute(int[] arr) {
 
-        int  count = 0;
+        int count = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            long sum =0;
-            for (int j = i; j <arr.length ; j++) {
+            long sum = 0;
+            for (int j = i; j < arr.length; j++) {
 
-                sum+=arr[j];
-                if(sum ==0){
-                    int minLength = j-i+1;
+                sum += arr[j];
+                if (sum == 0) {
+                    int minLength = j - i + 1;
                     count = Math.max(minLength, count);
                 }
             }
         }
         return count;
     }
+
     public static int maxLenBetter(int[] arr) {
-        HashMap<Integer, Integer> map =  new HashMap<>();
-        int count =0;
-        int maxSum =0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        int maxSum = 0;
 
-        map.put(0,0);
+        map.put(0, 0);
 
-        for(int i=0;i<arr.length;i++){
-            maxSum +=arr[i];
+        for (int i = 0; i < arr.length; i++) {
+            maxSum += arr[i];
 
-            if(map.containsKey(maxSum)){
-                int len =  (i+1)-map.get(maxSum);
+            if (map.containsKey(maxSum)) {
+                int len = (i + 1) - map.get(maxSum);
                 count = Math.max(count, len);
-            }else{
-                map.put(maxSum, i+1);
+            } else {
+                map.put(maxSum, i + 1);
+            }
+        }
+        return count;
+    }
+
+    public static int subarraysWithXorKBrute(int[] nums, int k) {
+        int count = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            int xor = 0;
+
+            for (int j = i; j < nums.length; j++) {
+                xor ^= nums[j];
+
+                if (xor == k) {
+                    count++;
+                }
+            }
+        }
+
+
+        return count;
+
+    }
+
+    public static int subarraysWithXorK(int[] nums, int k) {
+        int count = 0;
+        int xor = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+
+        for (int num : nums) {
+            xor ^= num;
+
+            if (map.containsKey(xor ^ k)) {
+                count += map.get(xor ^ k);
+            } else {
+                map.put(xor, map.getOrDefault(xor, 0) + 1);
             }
         }
         return count;
