@@ -316,12 +316,10 @@ public class ArraysHard {
 
         for (int num : nums) {
             xor ^= num;
+            int x = xor ^ k;
 
-            if (map.containsKey(xor ^ k)) {
-                count += map.get(xor ^ k);
-            } else {
-                map.put(xor, map.getOrDefault(xor, 0) + 1);
-            }
+            if (map.containsKey(x)) count += map.get(x);
+            map.put(xor, map.getOrDefault(xor, 0) + 1);
         }
         return count;
     }
