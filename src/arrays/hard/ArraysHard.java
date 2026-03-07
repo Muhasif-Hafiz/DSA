@@ -325,10 +325,7 @@ public class ArraysHard {
     }
 
     public static int[][] merge(int[][] intervals) {
-        Arrays.sort(
-                intervals,
-                (a, b) -> Integer.compare(a[0], b[0])
-        );
+        Arrays.sort(intervals);
         List<List<Integer>> merged = new ArrayList<>();
 
         for (int [] interval : intervals){
