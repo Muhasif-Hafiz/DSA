@@ -3,7 +3,8 @@ void main() {
     //rectangularStarPattern(5);
     //rightAngledTrianglePattern(5);
     //dualLoop(0, 5, 0, 5, '*');
-    rightAngledNumberPyramidPatternII(5);
+   // rightAngledNumberPyramidPatternII(5);
+    invertedNumberRightPyramidPattern(5);
 }
 
 
@@ -50,6 +51,15 @@ public static void  rightAngledNumberPyramidPatternII(int n){
     for(int i =1;i<=n ;i ++){
         for(int j =1;j<=i;j++){
             System.out.print(i);
+        }
+        System.out.println();
+    }
+}
+public static  void invertedNumberRightPyramidPattern(int n){
+
+    for(int i =n; i>=1;i--){
+        for(int j=1;j<=i;j++){
+            System.out.print(j);
         }
         System.out.println();
     }
