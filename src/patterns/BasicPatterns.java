@@ -5,7 +5,8 @@ void main() {
     //dualLoop(0, 5, 0, 5, '*');
    // rightAngledNumberPyramidPatternII(5);
     //invertedNumberRightPyramidPattern(5);
-    startPattern(5);
+   // startPattern(5);
+    invertedStarPattern(5);
 }
 
 
@@ -83,5 +84,22 @@ public static void startPattern(int n){
 
         System.out.println();
 
+    }
+}
+
+public static void invertedStarPattern(int n){
+    for(int i =1;i<=n;i++){
+        // spaces
+        for(int j =1; j<i;j++){
+            System.out.print("   ");
+        }
+        // star
+        for(int k =1;k<=n-i+1;k++){
+            System.out.print(" * ");
+        }
+        for(int l =1;l<=n-i;l++){
+            System.out.print(" * ");
+        }
+        System.out.println();
     }
 }
