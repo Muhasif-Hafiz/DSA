@@ -4,7 +4,8 @@ void main() {
     //rightAngledTrianglePattern(5);
     //dualLoop(0, 5, 0, 5, '*');
    // rightAngledNumberPyramidPatternII(5);
-    invertedNumberRightPyramidPattern(5);
+    //invertedNumberRightPyramidPattern(5);
+    startPattern(5);
 }
 
 
@@ -62,5 +63,25 @@ public static  void invertedNumberRightPyramidPattern(int n){
             System.out.print(j);
         }
         System.out.println();
+    }
+}
+public static void startPattern(int n){
+
+
+    for(int i = 1;i<=n;i++){
+
+        for(int j =1; j<= n-i;j++){
+            System.out.print("   ");
+        }
+        for (int k = 1; k <=i ; k++) {
+            System.out.print(" * ");
+        }
+
+        for(int l =2;l<=i;l++){
+            System.out.print(" * ");
+        }
+
+        System.out.println();
+
     }
 }
