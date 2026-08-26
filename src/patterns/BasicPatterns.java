@@ -7,7 +7,8 @@ void main() {
     //invertedNumberRightPyramidPattern(5);
    // startPattern(5);
     //invertedStarPattern(5);
-    binaryNumberTriangle(5);
+    //binaryNumberTriangle(5);
+    numberCrownPattern(4);
 }
 
 
@@ -110,6 +111,25 @@ public static void binaryNumberTriangle(int n ){
     for(int i =1;i<=n;i++){
         for (int j =1;j<=i;j++){
             System.out.print((i+j)%2==0 ? "1" : "0");
+        }
+        System.out.println();
+    }
+}
+
+public static void  numberCrownPattern(int n){
+
+    for (int i =1;i<=n;i++){
+        for(int j =1;j<=i;j++){
+            System.out.print(j);
+        }
+        for(int k =1;k<=n-i;k++){
+            System.out.print(" ");
+        }
+        for(int l =n-i;l>=1;l--){
+            System.out.print(" ");
+        }
+        for(int m =i;m>=1;m--){
+            System.out.print(m);
         }
         System.out.println();
     }
