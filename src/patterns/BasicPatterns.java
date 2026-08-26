@@ -10,7 +10,8 @@ void main() {
     //binaryNumberTriangle(5);
    // numberCrownPattern(4);
     //increasingLetterTrianglePattern(5);
-    increasingLetterTrianglePatternApproach2(5);
+    //increasingLetterTrianglePatternApproach2(5);
+    alphaTrianglePattern(5);
 }
 
 
@@ -158,4 +159,16 @@ public static void increasingLetterTrianglePatternApproach2(int n){
         System.out.println();
     }
 
+}
+
+
+public static void alphaTrianglePattern(int n){
+
+    for (int i =0;i<n ;i++){
+
+        for (char ch =(char) ('E' -i); ch<='E' ;ch ++){
+            System.out.print( ch + " ");
+        }
+        System.out.println();
+    }
 }
