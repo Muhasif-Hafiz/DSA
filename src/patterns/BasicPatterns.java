@@ -8,7 +8,8 @@ void main() {
    // startPattern(5);
     //invertedStarPattern(5);
     //binaryNumberTriangle(5);
-    numberCrownPattern(4);
+   // numberCrownPattern(4);
+    increasingLetterTrianglePattern(5);
 }
 
 
@@ -133,4 +134,16 @@ public static void  numberCrownPattern(int n){
         }
         System.out.println();
     }
+}
+
+public static void increasingLetterTrianglePattern(int n){
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            char printing = (char)('A' + j);
+            System.out.print(printing);
+        }
+        System.out.println();
+    }
+
 }
