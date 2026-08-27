@@ -13,7 +13,8 @@ void main() {
     //increasingLetterTrianglePatternApproach2(5);
     //alphaTrianglePattern(5);
     //symmetricButterflyPattern(5);
-    hollowRectanglePattern(5);
+    //hollowRectanglePattern(5);
+    TheNumberPattern(4);
 }
 
 
@@ -219,6 +220,25 @@ public static void hollowRectanglePattern(int n){
                 System.out.print(" ");
             }
 
+        }
+        System.out.println();
+    }
+}
+
+public static void TheNumberPattern(int n){
+
+    for(int i=0;i<2*n-1;i++){
+        for(int j =0;j<2*n-1;j++){
+
+            int left =j;
+            int top = i;
+            int bottom = (2*n-2)-i;;
+            int right =  (2*n-2) -j;
+
+            int minDistance = Math.min(Math.min(left, top), Math.min(right, bottom));
+
+            int ans = n - minDistance;
+            System.out.print(ans +" ");
         }
         System.out.println();
     }
