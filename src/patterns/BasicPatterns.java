@@ -204,6 +204,7 @@ public static void symmetricButterflyPattern(int n){
         }
         System.out.println();
     }
+
 }
 
 public static void hollowRectanglePattern(int n){
