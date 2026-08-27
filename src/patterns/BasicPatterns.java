@@ -208,6 +208,7 @@ public static void symmetricButterflyPattern(int n){
 
 }
 
+
 public static void hollowRectanglePattern(int n){
 
     for (int i =0; i <n ;i++){
