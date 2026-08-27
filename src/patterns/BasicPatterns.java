@@ -11,7 +11,9 @@ void main() {
    // numberCrownPattern(4);
     //increasingLetterTrianglePattern(5);
     //increasingLetterTrianglePatternApproach2(5);
-    alphaTrianglePattern(5);
+    //alphaTrianglePattern(5);
+    //symmetricButterflyPattern(5);
+    hollowRectanglePattern(5);
 }
 
 
@@ -132,7 +134,7 @@ public static void  numberCrownPattern(int n){
             System.out.print(" ");
         }
         for(int m =i;m>=1;m--){
-            System.out.print(m);
+            System.out.print("*");
         }
         System.out.println();
     }
@@ -168,6 +170,52 @@ public static void alphaTrianglePattern(int n){
 
         for (char ch =(char) ('E' -i); ch<='E' ;ch ++){
             System.out.print( ch + " ");
+        }
+        System.out.println();
+    }
+}
+
+public static void symmetricButterflyPattern(int n){
+
+    for(int i =1;i<=n;i++){
+        for(int j =1;j<=i;j++){
+            System.out.print("*");
+        }
+        for(int k=1;k<=n-i;k++){
+            System.out.print(" ");
+        }
+        for(int k=1;k<=n-i;k++){
+            System.out.print(" ");
+        }
+        for(int l =1;l<=i;l++){
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+    for(int i =1;i<n;i++){
+        for(int j =1;j<=n-i;j++){
+            System.out.print("*");
+        }
+        for(int m =1;m<=i;m++){
+            System.out.print("  ");
+        }
+        for(int k =1;k<=n-i;k++){
+            System.out.print("*");
+        }
+        System.out.println();
+    }
+}
+
+public static void hollowRectanglePattern(int n){
+
+    for (int i =0; i <n ;i++){
+        for(int j =0;j<n;j++){
+            if(i==0 || i==n-1 || j==0 || j==n-1){
+                System.out.print("*");
+            }else{
+                System.out.print(" ");
+            }
+
         }
         System.out.println();
     }
