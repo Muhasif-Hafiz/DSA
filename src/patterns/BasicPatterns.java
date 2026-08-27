@@ -172,6 +172,7 @@ public static void alphaTrianglePattern(int n){
             System.out.print( ch + " ");
         }
         System.out.println();
+
     }
 }
 
